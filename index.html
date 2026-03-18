@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Setter Development Roadmap | Dropship Academy X</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: #0a1f1f;
+            color: #e8f0f0;
+            line-height: 1.7;
+            min-height: 100vh;
+            background-image: linear-gradient(rgba(0, 212, 170, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 212, 170, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+        .container { max-width: 800px; margin: 0 auto; padding: 40px 20px 80px; }
+ 
+        /* Hero */
+        .hero { text-align: center; padding: 60px 20px; margin-bottom: 48px; }
+        .hero-icon { font-size: 64px; margin-bottom: 24px; display: block; }
+        .hero h1 { font-size: clamp(28px, 5vw, 42px); font-weight: 700; color: #ffffff; margin-bottom: 12px; letter-spacing: -1px; }
+        .hero-subtitle { font-size: 16px; color: rgba(255, 255, 255, 0.6); margin-bottom: 32px; }
+        .hero-quote {
+            font-size: 17px; font-style: italic; color: #00d4aa;
+            max-width: 500px; margin: 0 auto;
+            padding: 20px 24px;
+            border-left: 3px solid #00d4aa;
+            background: rgba(0, 212, 170, 0.05);
+            border-radius: 0 12px 12px 0;
+            text-align: left;
+        }
+ 
+        /* Intro Card */
+        .intro-card {
+            background: linear-gradient(135deg, rgba(0, 212, 170, 0.1) 0%, rgba(0, 212, 170, 0.03) 100%);
+            border: 2px solid rgba(0, 212, 170, 0.3);
+            border-radius: 20px;
+            padding: 32px;
+            margin-bottom: 48px;
+        }
+        .intro-card h2 { font-size: 22px; font-weight: 700; color: #00d4aa; margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
+        .intro-card p { font-size: 15px; color: rgba(255, 255, 255, 0.85); margin-bottom: 16px; line-height: 1.8; }
+        .intro-card p:last-child { margin-bottom: 0; }
+        .intro-card strong { color: #00d4aa; }
+ 
+        /* Principles Grid */
+        .principles { margin-bottom: 48px; }
+        .principles h2 { font-size: 20px; font-weight: 700; color: #ffffff; margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+        .principles-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; }
+        .principle-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+        }
+        .principle-card h3 { font-size: 14px; font-weight: 700; color: #00d4aa; margin-bottom: 8px; }
+        .principle-card p { font-size: 13px; color: rgba(255, 255, 255, 0.6); }
+ 
+        /* Section Headers */
+        .section-header {
+            display: flex; align-items: center; gap: 12px;
+            margin: 48px 0 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .section-icon { font-size: 28px; }
+        .section-title { font-size: 22px; font-weight: 700; color: #ffffff; }
+        .section-subtitle { font-size: 14px; color: rgba(255, 255, 255, 0.5); margin-left: auto; }
+ 
+        /* Frameworks */
+        .frameworks-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; margin-bottom: 24px; }
+        .framework-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 24px;
+        }
+        .framework-card h3 { font-size: 16px; font-weight: 700; color: #ffffff; margin-bottom: 6px; }
+        .framework-card p { font-size: 13px; color: rgba(255, 255, 255, 0.5); margin-bottom: 16px; }
+        .framework-card a {
+            display: inline-flex; align-items: center; gap: 8px;
+            color: #00d4aa; text-decoration: none; font-size: 14px; font-weight: 600;
+        }
+        .framework-card a:hover { text-decoration: underline; }
+ 
+        /* Warning Box */
+        .warning-box {
+            background: linear-gradient(135deg, rgba(255, 204, 0, 0.15) 0%, rgba(255, 204, 0, 0.05) 100%);
+            border: 2px solid rgba(255, 204, 0, 0.4);
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin-bottom: 32px;
+        }
+        .warning-box h4 { font-size: 14px; font-weight: 700; color: #ffcc00; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+        .warning-box p { font-size: 14px; color: rgba(255, 255, 255, 0.8); margin-bottom: 12px; }
+        .warning-box p:last-child { margin-bottom: 0; }
+        .warning-box a { color: #ffcc00; }
+ 
+        /* Phase Cards */
+        .phase-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 24px;
+            position: relative;
+        }
+        .phase-badge {
+            position: absolute;
+            top: -12px; left: 24px;
+            background: #00d4aa;
+            color: #0a1f1f;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .phase-card h3 { font-size: 20px; font-weight: 700; color: #ffffff; margin: 8px 0 8px; }
+        .phase-card .goal { font-size: 14px; color: #00d4aa; margin-bottom: 24px; font-weight: 500; }
+ 
+        /* Training Canvas CTA */
+        .canvas-cta {
+            background: linear-gradient(135deg, rgba(0, 212, 170, 0.15) 0%, rgba(0, 212, 170, 0.05) 100%);
+            border: 2px solid rgba(0, 212, 170, 0.4);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+        .canvas-cta h4 { font-size: 16px; font-weight: 700; color: #ffffff; margin-bottom: 8px; }
+        .canvas-cta p { font-size: 14px; color: rgba(255, 255, 255, 0.7); margin-bottom: 16px; }
+        .canvas-cta a {
+            display: inline-flex; align-items: center; gap: 10px;
+            background: #00d4aa; color: #0a1f1f;
+            text-decoration: none; padding: 14px 28px;
+            border-radius: 10px; font-weight: 700; font-size: 15px;
+            transition: all 0.3s ease;
+        }
+        .canvas-cta a:hover { background: #00e6b8; transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0, 212, 170, 0.3); }
+        .canvas-cta .subtext { font-size: 12px; color: rgba(255, 255, 255, 0.5); margin-top: 12px; }
+ 
+        /* Checklist */
+        .checklist { list-style: none; margin: 20px 0; }
+        .checklist li {
+            display: flex; align-items: flex-start; gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 15px; color: rgba(255, 255, 255, 0.85);
+        }
+        .checklist li:last-child { border-bottom: none; }
+        .checklist li::before {
+            content: "☐";
+            color: #00d4aa;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+ 
+        /* Pass Criteria */
+        .pass-criteria {
+            background: rgba(0, 212, 170, 0.1);
+            border: 1px solid rgba(0, 212, 170, 0.3);
+            border-radius: 10px;
+            padding: 16px 20px;
+            margin-top: 20px;
+        }
+        .pass-criteria h5 { font-size: 13px; font-weight: 700; color: #00d4aa; margin-bottom: 6px; }
+        .pass-criteria p { font-size: 14px; color: rgba(255, 255, 255, 0.8); margin: 0; }
+ 
+        /* KPI Grid */
+        .kpi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 24px 0; }
+        @media (max-width: 600px) { .kpi-grid { grid-template-columns: 1fr; } }
+        .kpi-card {
+            background: rgba(0, 212, 170, 0.05);
+            border: 1px solid rgba(0, 212, 170, 0.2);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+        }
+        .kpi-number { font-size: 36px; font-weight: 700; color: #00d4aa; }
+        .kpi-label { font-size: 14px; font-weight: 600; color: #ffffff; margin: 8px 0; }
+        .kpi-details { font-size: 12px; color: rgba(255, 255, 255, 0.5); line-height: 1.6; }
+ 
+        /* Submission Format */
+        .submission-box {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 24px;
+        }
+        .submission-box h5 { font-size: 14px; font-weight: 700; color: #ffffff; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+        .submission-box pre {
+            font-family: 'SF Mono', Monaco, monospace;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.7);
+            background: rgba(0, 0, 0, 0.2);
+            padding: 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            white-space: pre-wrap;
+        }
+ 
+        /* Miss Warning */
+        .miss-warning {
+            background: linear-gradient(135deg, rgba(255, 100, 100, 0.15) 0%, rgba(255, 100, 100, 0.05) 100%);
+            border: 1px solid rgba(255, 100, 100, 0.3);
+            border-radius: 10px;
+            padding: 16px 20px;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .miss-warning p { font-size: 14px; color: #ff8a8a; font-weight: 600; margin: 0; }
+ 
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 48px 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 48px;
+        }
+        .footer-logo { font-size: 18px; font-weight: 700; color: #ffffff; margin-bottom: 8px; }
+        .footer-tagline { font-size: 14px; color: rgba(255, 255, 255, 0.5); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Hero -->
+        <div class="hero">
+            <span class="hero-icon">📈</span>
+            <h1>Setter Development Roadmap</h1>
+            <p class="hero-subtitle">Professional Growth Path – From Trainee to Top Performer</p>
+            <div class="hero-quote">
+                "Discipline builds momentum. Momentum builds mastery. Mastery builds freedom."
+            </div>
+        </div>
+ 
+        <!-- Intro -->
+        <div class="intro-card">
+            <h2>👋 What is a Setter?</h2>
+            <p>Welcome! This is your first step with us, and I'm excited you're here. You may have ideas about what an appointment setter is, but here, it's different. We're not just booking calls. We operate in the <strong>top 0.01% globally</strong>, generating €1 million monthly.</p>
+            <p>As a setter here, you're not just scheduling. You're the <strong>first trusted advisor</strong>, qualifying clients with insight and care.</p>
+            <p>But success starts with mindset. We'll work on yours: your routines, your health, cutting out what holds you back. If that feels like too much, this might not be for you. But if you're ready, being a setter here means we hold you to standards that unlock your best.</p>
+        </div>
+ 
+        <!-- Key Principles -->
+        <div class="principles">
+            <h2>🔑 Key Principles</h2>
+            <div class="principles-grid">
+                <div class="principle-card">
+                    <h3>Meritocracy</h3>
+                    <p>Nothing is handed out. Everything is earned.</p>
+                </div>
+                <div class="principle-card">
+                    <h3>Discipline</h3>
+                    <p>The best setters are machines of consistency.</p>
+                </div>
+                <div class="principle-card">
+                    <h3>Coaching</h3>
+                    <p>Feedback is fuel. Roleplays are non-negotiable.</p>
+                </div>
+                <div class="principle-card">
+                    <h3>Performance = Opportunity</h3>
+                    <p>Better chats → Better calls → Better income.</p>
+                </div>
+            </div>
+        </div>
+ 
+        <!-- Frameworks Section -->
+        <div class="section-header">
+            <span class="section-icon">📋</span>
+            <h2 class="section-title">Your Frameworks</h2>
+            <span class="section-subtitle">Pick based on your role</span>
+        </div>
+ 
+        <div class="frameworks-grid">
+            <div class="framework-card">
+                <h3>DM Setter Framework</h3>
+                <p>For DM roleplays</p>
+                <a href="https://www.notion.so/Master-Setter-Framework-v2-3023117905e9816b8de0eef8604c5426" target="_blank">📄 Open Framework →</a>
+            </div>
+            <div class="framework-card">
+                <h3>Caller Framework</h3>
+                <p>For call roleplays</p>
+                <a href="https://cotton-skate-540.notion.site/Webinar-Lead-Call-Framework-28630c239f5d80259a8bc6f83157dbff" target="_blank">📄 Open Framework →</a>
+            </div>
+        </div>
+ 
+        <div class="warning-box">
+            <h4>⚠️ Recording Rule (This decides if it counts)</h4>
+            <p><strong>All roleplays must be recorded with Fathom or they do not count.</strong></p>
+            <p>
+                <a href="https://fathom.video/home" target="_blank">🎥 Get Fathom here →</a> &nbsp;|&nbsp;
+                <a href="https://fathom.video/share/DQimJceRgnDcWGFSKxYeGzQ6s7jfX5wX" target="_blank">📋 See roleplay example →</a>
+            </p>
+        </div>
+ 
+        <!-- Phase 1 -->
+        <div class="section-header">
+            <span class="section-icon">🚀</span>
+            <h2 class="section-title">The Training Phases</h2>
+            <span class="section-subtitle">Follow exactly. No shortcuts.</span>
+        </div>
+ 
+        <div class="phase-card">
+            <div class="phase-badge">Phase 1</div>
+            <h3>Week 1: Complete The Training</h3>
+            <p class="goal">Goal: Learn the fundamentals. Absorb everything.</p>
+ 
+            <div class="canvas-cta">
+                <h4>🎯 Complete the Setter Training Canvas</h4>
+                <p>All training videos, lessons, and frameworks in one place. Track your progress as you go.</p>
+                <a href="https://freeguidedsa.github.io/SETTER-TRAINING/" target="_blank">
+                    Open Training Canvas →
+                </a>
+                <p class="subtext">Your progress is saved automatically. Complete 100% to pass Phase 1.</p>
+            </div>
+ 
+            <ul class="checklist">
+                <li>Watch all 3 video modules in order</li>
+                <li>Read every lesson in the Training Library</li>
+                <li>Check off each item as you complete it</li>
+                <li>Take notes on key concepts</li>
+                <li>Ask questions in Slack if unclear</li>
+                <li>Send BOD (Beginning of Day) every day</li>
+                <li>Send EOD (End of Day) every day</li>
+            </ul>
+ 
+            <div class="pass-criteria">
+                <h5>✓ Pass Criteria</h5>
+                <p>100% Training Canvas completion + BOD/EOD daily with zero misses.</p>
+            </div>
+        </div>
+ 
+        <!-- Phase 2 -->
+        <div class="phase-card">
+            <div class="phase-badge">Phase 2</div>
+            <h3>Week 2+: Prove You Want The Role</h3>
+            <p class="goal">Goal: Reps + discipline. Every single week.</p>
+ 
+            <p style="font-size: 15px; color: rgba(255,255,255,0.8); margin-bottom: 24px;">Training means nothing without execution. Now you prove you can do the work consistently.</p>
+ 
+            <h4 style="font-size: 14px; color: #00d4aa; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 1px;">Weekly KPIs (Must Hit All 3)</h4>
+ 
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <div class="kpi-number">7</div>
+                    <div class="kpi-label">Roleplays per week</div>
+                    <div class="kpi-details">Recorded with Fathom<br>Using correct framework<br>Fathom link required</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-number">7</div>
+                    <div class="kpi-label">ChatGPT trainings</div>
+                    <div class="kpi-details">1 per day minimum<br>Full training or screenshots<br>Send to your manager</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-number">14</div>
+                    <div class="kpi-label">Daily reports</div>
+                    <div class="kpi-details">BOD every morning<br>EOD every evening<br>No exceptions</div>
+                </div>
+            </div>
+ 
+            <div class="pass-criteria">
+                <h5>✓ Pass Criteria</h5>
+                <p>All 3 KPIs hit in the same week. Miss one? You do not move forward.</p>
+            </div>
+ 
+            <div class="miss-warning">
+                <p>⚠️ If you miss KPIs, you do not advance. Period.</p>
+            </div>
+ 
+            <div class="submission-box">
+                <h5>📋 Submission Format (Send weekly)</h5>
+                <pre>Week of: [date]
+ 
+Roleplays (7 Fathom links):
+1)
+2)
+3)
+4)
+5)
+6)
+7)
+ 
+ChatGPT trainings (7):
+1)
+2)
+3)
+4)
+5)
+6)
+7)
+ 
+BOD/EOD: Completed daily (yes/no)</pre>
+            </div>
+        </div>
+ 
+        <!-- Footer -->
+        <div class="footer">
+            <div class="footer-logo">Dropship Academy X</div>
+            <p class="footer-tagline">Excellence is not optional. It's the standard.</p>
+        </div>
+    </div>
+</body>
+</html>
+ 
